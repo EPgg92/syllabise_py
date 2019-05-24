@@ -23,7 +23,7 @@ def open_yml(path):
     """
     returned_dic = {}
     with open(path, 'r') as stream:
-        returned_dic = yaml.load(stream)
+        returned_dic = yaml.load(stream, Loader=yaml.SafeLoader)
     return returned_dic
 
 
