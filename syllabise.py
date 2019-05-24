@@ -1,16 +1,27 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Package of usefull functions to syllabise word in french.
+"""syllabise.py
 
-This file needs a constants.yaml file containing:
-    - a list named vowel containing your vowel
-    - a list named consonnant containing your consonnant
+Package of useful functions to syllabise word in french.
+
+This file needs a constants.yaml file in the same directory as the script 
+containing:
+    - a list named vowel containing your vowels (V)
+    - a list named consonnant containing your consonnants (C)
     - a dictionnary named exeption containing as key some letters and as value
-    a V or a C
+      a V or a C
+
+Usage:
+  ./syllabise.py WORD [WORD ...]
+  ./syllabise.py (-f | --file) inputfile
+  ./syllabise.py (-h | --help)
+  ./syllabise.py (-v | --version)
+
 """
 import re
 import sys
 import yaml
+import argparse
 
 
 def open_yml(path):
@@ -140,12 +151,34 @@ def syllabise_word(word):
         syllabes.append("".join(syll))
     return syllabes
 
+def print_syllabise(word):
+    """Print the syllabised word
+
+    :param word: a word
+    :type word: str
+    """
+    print('{} => {}'.format(word, str(syllabise_word(word))))
+
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        print('usage: ./syllabise.py WORD [WORD [...]]')
+    # Manage args
+    parser = argparse.ArgumentParser(usage=__doc__, prog='syllabise.py')
+    parser.add_argument('-f', '--file', nargs=1, 
+        help="syllabise the text contained in the input file")
+    parser.add_argument('--version', action='version',
+        version='%(prog)s 1.0')
+    parser.add_argument('words', metavar='WORD', type=str, nargs='*',
+                   help='words to syllabise')
+    args = parser.parse_args()
+    print(args)
+
+    if args.file != None:
+        for file in args.file:
+            print(file)
+            with open(file,'r') as f:
+                for line in f:
+                    for word in line.split():
+                        print_syllabise(word)
     else:
-        argv = sys.argv[1:]
-        for words in argv:
-            for word in words.split():
-                print('{} => {}'.format(word, str(syllabise_word(word))))
+        for word in args.words:
+            print_syllabise(word)
