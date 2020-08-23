@@ -3,7 +3,7 @@ Pour un usage spécifique de la fonction de syllabise_word du PAM
 
 ## Pre-requis
 
-L'environnement de cette fonction est `python3`. Le module `yaml` est nécessaire pour l'exécution il faut dont installer le package `PyYAML`:
+L'environnement de cette fonction est `python3`. Le module `yaml` est nécessaire pour l'exécution ; il faut dont installer le package `PyYAML` :
 ```
 pip install PyYAML
 ```
@@ -18,7 +18,7 @@ Rendez votre fichier exécutable:
 ```
 chmod +x syllabise.py
 ```
-Lancez le script avec les commandes suivantes:
+Lancez le script avec l'une des commandes suivantes :
 ```
 ./syllabise.py syllabation
 ```
@@ -27,9 +27,9 @@ ou
 python3 syllabise.py syllabation
 ```
 
-## Example
+## Exemple
 
-Deux examples de retours:
+Deux exemples de retours :
 
 ```
 $> ./syllabise.py syllabation
@@ -44,7 +44,7 @@ phrase => ['phra', 'se']
 
 ## Utilisation des exceptions
 
-Changez le fichier `constants.yaml` à votre convenance:
+Changez le fichier `constants.yaml` à votre convenance :
 ```
 vowel:
   - /
@@ -65,7 +65,7 @@ syllabation/ => ['sy', 'lla', 'ba', 'tion', '/']
 
 ```
 
-Toute amélioration est la bienvenue pour une syllabation générique.
+Toute amélioration est bienvenue pour une syllabation générique.
 
 __N'hésitez pas à soumettre des issues.__
 
@@ -103,7 +103,7 @@ En français, sont tautosyllabiques les groupes dont la seconde consonne est un 
 - j
 
 ### Groupes tautosyllabiques .CCC
-Ils sont rares, mais existent, comme dans _scribe_ ou _druide_ (/drɥidə/). Druide ne sera a priori par traité par le syllabeur du PAM (parce que l'appoximante /ɥ/ n'est pas reconnue par le PAM), mais pour le type _scribe_, les règles sont les suivantes :
+Ils sont rares, mais existent, comme dans _scribe_ ou _druide_ (/drɥidə/). _Druide_ ne sera a priori par traité par le syllabeur du PAM (parce que l'appoximante /ɥ/ n'est pas reconnue par le PAM), mais pour le type _scribe_, les règles sont les suivantes :
 - le premier élément doit être un "s"
 - le second et le troisième élément doivent former ensemble un groupe .CC autonome.
 Mais en fait il semble que ce soit une exception, qui ne s'applique pas sur la base d'une règle... **À ne pas appliquer !**
